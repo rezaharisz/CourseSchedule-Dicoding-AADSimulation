@@ -54,9 +54,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="4dp"
             android:layout_toEndOf="@+id/ib_starttime"
             android:text="@string/start_time"
+            android:textColor="@color/textPrimary" />
+
+        <TextView
+            android:id="@+id/starttime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_starttime"
+            android:layout_toEndOf="@+id/ib_starttime"
             android:textColor="@color/textPrimary" />
 
         <ImageButton
@@ -74,9 +82,18 @@
             android:id="@+id/tv_endtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:layout_toEndOf="@+id/ib_endtime"
             android:layout_alignParentTop="true"
             android:text="@string/end_time"
+            android:textColor="@color/textPrimary" />
+
+        <TextView
+            android:id="@+id/endtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_endtime"
+            android:layout_toEndOf="@+id/ib_endtime"
             android:textColor="@color/textPrimary" />
 
     </RelativeLayout>
