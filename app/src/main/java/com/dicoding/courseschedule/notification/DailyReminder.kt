@@ -36,7 +36,8 @@ class DailyReminder : BroadcastReceiver() {
         val i = Intent(context, DailyReminder::class.java)
 
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 6)
+        calendar.set(Calendar.HOUR_OF_DAY, 23)
+        calendar.set(Calendar.MINUTE, 16)
 
         val pendingIntent = PendingIntent.getBroadcast(context, ID_REPEATING, i, 0)
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
@@ -45,7 +46,7 @@ class DailyReminder : BroadcastReceiver() {
     }
 
     fun cancelAlarm(context: Context) {
-        val alarmManager =context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val i = Intent(context, DailyReminder::class.java)
         val pendingIntent = PendingIntent.getBroadcast(context, ID_REPEATING, i, 0)
         pendingIntent.cancel()
@@ -64,16 +65,16 @@ class DailyReminder : BroadcastReceiver() {
         }
 
         val i = Intent(context, HomeActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(context, 0, i, 0)
+        val pendingIntent = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val notificationManagerCompat = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val builder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
             .setContentIntent(pendingIntent)
             .setSmallIcon(R.drawable.ic_notifications)
-            .setContentTitle("Course Scheduler")
+            .setContentTitle("You Have a Course Schedule Today")
             .setStyle(notificationStyle)
-            .setContentText("You Have a Course Schedule Today")
             .setAutoCancel(true)
+            .setOngoing(true)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             val channel = NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
@@ -81,7 +82,6 @@ class DailyReminder : BroadcastReceiver() {
             channel.vibrationPattern = longArrayOf(1000, 1000, 1000, 1000, 1000)
 
             builder.setChannelId(NOTIFICATION_CHANNEL_ID)
-
             notificationManagerCompat.createNotificationChannel(channel)
         }
 

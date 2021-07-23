@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -14,10 +15,6 @@ import com.dicoding.courseschedule.util.DayName.Companion.getByNumber
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var viewModel: DetailViewModel
-    private val tvCourseName = findViewById<TextView>(R.id.tv_course_name)
-    private val tvTime = findViewById<TextView>(R.id.tv_time)
-    private val tvLecturer = findViewById<TextView>(R.id.tv_lecturer)
-    private val tvNote = findViewById<TextView>(R.id.tv_note)
 
     companion object {
         const val COURSE_ID = "courseId"
@@ -36,6 +33,11 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun showCourseDetail(course: Course?) {
+        val tvCourseName = findViewById<TextView>(R.id.tv_course_name)
+        val tvTime = findViewById<TextView>(R.id.tv_time)
+        val tvLecturer = findViewById<TextView>(R.id.tv_lecturer)
+        val tvNote = findViewById<TextView>(R.id.tv_note)
+
         course?.apply {
             val timeString = getString(R.string.time_format)
             val dayName = getByNumber(day)
@@ -62,6 +64,7 @@ class DetailActivity : AppCompatActivity() {
                     setPositiveButton(getString(R.string.yes)) { _, _ ->
                         viewModel.delete()
                         finish()
+                        Toast.makeText(context, "Course Deleted Successfully", Toast.LENGTH_SHORT).show()
                     }
                     show()
                 }

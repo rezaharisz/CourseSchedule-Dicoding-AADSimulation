@@ -35,4 +35,5 @@ class CourseViewHolder(view: View): RecyclerView.ViewHolder(view) {
     }
 
     fun getCourse(): Course = course
+
 }

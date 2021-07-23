@@ -2,10 +2,12 @@ package com.dicoding.courseschedule.ui.add
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.courseschedule.R
 import com.dicoding.courseschedule.util.TimePickerFragment
@@ -15,11 +17,6 @@ class AddCourseActivity : AppCompatActivity(), TimePickerFragment.DialogTimeList
     private lateinit var addCourseViewModel: AddCourseViewModel
     private lateinit var timeStart: String
     private lateinit var timeEnd: String
-
-    private val edCourseName = findViewById<TextView>(R.id.ed_coursename)
-    private val spinnerCourse = findViewById<Spinner>(R.id.spinner_course)
-    private val edLecturer = findViewById<TextView>(R.id.ed_lecturer)
-    private val edNote = findViewById<TextView>(R.id.ed_note)
 
     companion object{
         const val STARTTIME = "starttime"
@@ -37,7 +34,18 @@ class AddCourseActivity : AppCompatActivity(), TimePickerFragment.DialogTimeList
         addCourseViewModel.saved
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_add, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        val edCourseName = findViewById<TextView>(R.id.ed_coursename)
+        val spinnerCourse = findViewById<Spinner>(R.id.spinner_course)
+        val edLecturer = findViewById<TextView>(R.id.ed_lecturer)
+        val edNote = findViewById<TextView>(R.id.ed_note)
+
         return if (item.itemId == R.id.action_insert){
             val courseName = edCourseName.text.toString()
             val dayCourse = spinnerCourse.selectedItemPosition
@@ -45,8 +53,9 @@ class AddCourseActivity : AppCompatActivity(), TimePickerFragment.DialogTimeList
             val note = edNote.text.toString()
 
             addCourseViewModel.insertCourse(courseName, dayCourse, timeStart, timeEnd, lecturer, note)
-            true
 
+            Toast.makeText(this, "Course Added Successfully", Toast.LENGTH_SHORT).show()
+            true
         } else{
             super.onOptionsItemSelected(item)
         }
