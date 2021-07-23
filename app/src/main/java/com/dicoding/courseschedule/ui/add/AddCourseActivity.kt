@@ -45,8 +45,7 @@ class AddCourseActivity : AppCompatActivity(), TimePickerFragment.DialogTimeList
             val note = edNote.text.toString()
 
             addCourseViewModel.insertCourse(courseName, dayCourse, timeStart, timeEnd, lecturer, note)
-
-            return true
+            true
 
         } else{
             super.onOptionsItemSelected(item)
