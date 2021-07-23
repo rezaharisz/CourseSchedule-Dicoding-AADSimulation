@@ -53,6 +53,7 @@ class AddCourseActivity : AppCompatActivity(), TimePickerFragment.DialogTimeList
             val note = edNote.text.toString()
 
             addCourseViewModel.insertCourse(courseName, dayCourse, timeStart, timeEnd, lecturer, note)
+            super.onBackPressed()
 
             Toast.makeText(this, "Course Added Successfully", Toast.LENGTH_SHORT).show()
             true
