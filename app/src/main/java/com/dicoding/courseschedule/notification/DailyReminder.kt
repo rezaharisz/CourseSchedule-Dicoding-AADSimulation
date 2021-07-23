@@ -36,8 +36,7 @@ class DailyReminder : BroadcastReceiver() {
         val i = Intent(context, DailyReminder::class.java)
 
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 23)
-        calendar.set(Calendar.MINUTE, 16)
+        calendar.set(Calendar.HOUR_OF_DAY, 6)
 
         val pendingIntent = PendingIntent.getBroadcast(context, ID_REPEATING, i, 0)
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)

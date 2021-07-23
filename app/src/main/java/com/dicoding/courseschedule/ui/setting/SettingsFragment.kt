@@ -39,7 +39,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             } else{
                 context?.let { dailyReminder.cancelAlarm(it) }
             }
-            return@setOnPreferenceChangeListener true
+            true
         }
     }
 
